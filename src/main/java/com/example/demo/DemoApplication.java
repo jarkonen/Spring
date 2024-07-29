@@ -4,7 +4,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 
-import com.example.demo.conexion.Conexion_dbbd;
+import com.example.demo.conexion.Crud_clientes;
+
+import jakarta.annotation.PostConstruct;
 
 @SpringBootApplication
 public class DemoApplication {
@@ -23,8 +25,11 @@ public class DemoApplication {
         return new ServletRegistrationBean<>(new AnotherServlet(), "/anotherServlet");
     }
     
-    Conexion_dbbd x = new Conexion_dbbd();
-    
-   
+    @PostConstruct
+    public void init() {
+        //Crud_clientes.introduce_cliente("patata2", "patata2");
+        Crud_clientes.leer_clientes();
+        Crud_clientes.actualizar_cliente("Gallina", "gallina");
+    }
 
 }
